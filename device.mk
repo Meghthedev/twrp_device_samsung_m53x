@@ -14,3 +14,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PRODUCT_PROPERTIES += \
 	ro.fastbootd.available=true
+
+# USB
+PRODUCT_SYSTEM_PROPERTIES += \
+    ro.sys.usb.storage.type=mtp
