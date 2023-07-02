@@ -32,3 +32,7 @@
 /cam_vpu3           emmc      /dev/block/platform/bootdevice/by-name/cam_vpu3           flags=display=cam_vpu3
 /pi_img             emmc      /dev/block/platform/bootdevice/by-name/pi_img             flags=display=pi_img
 /vbmeta_samsung     emmc      /dev/block/platform/bootdevice/by-name/vbmeta_samsung     flags=display=vbmeta_samsung
+
+# Removable partitions
+/external_sd	    auto		/dev/block/mmcblk1p1	/dev/block/mmcblk1	flags=storage;wipeingui;removable
+/usb-otg	    auto		/dev/block/sdg1		    /dev/block/sdg	flags=storage;wipeingui;removable
