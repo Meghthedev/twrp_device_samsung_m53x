@@ -18,3 +18,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # USB
 PRODUCT_SYSTEM_PROPERTIES += \
     ro.sys.usb.storage.type=mtp
+
+# Kernel
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/Image:kernel
