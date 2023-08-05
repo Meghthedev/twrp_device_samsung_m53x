@@ -23,7 +23,8 @@ The Samsung Galaxy M53 5G (codenamed "m53x") is a smartphone from Samsung.
 ```
 source build/envsetup.sh
 lunch twrp_m53x-eng
-mka bootimage
+mka recoveryimage
+tar -cvf twrp_m53x.img.tar out/target/product/m53x/recovery.img
 ```
 
 ## Device Picture
