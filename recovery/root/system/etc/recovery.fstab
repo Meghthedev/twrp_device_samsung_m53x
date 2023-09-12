@@ -1,0 +1,14 @@
+# Android fstab file.
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+
+system					/system		f2fs		ro																		wait,,avb=vbmeta_system,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
+system					/system		ext4		ro																		wait,,avb=vbmeta_system,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
+system					/system		erofs		ro																		wait,,avb=vbmeta_system,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
+vendor					/vendor		f2fs		ro																		wait,,avb,logical,first_stage_mount
+product					/product	f2fs		ro																		wait,,avb,logical,first_stage_mount
+odm					/odm		f2fs		ro																		wait,,avb,logical,first_stage_mount
+
+/dev/block/by-name/metadata		/metadata	ext4		noatime,nosuid,nodev,noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic,sync							wait,check,formattable,first_stage_mount
+/dev/block/by-name/userdata		/data		f2fs		noatime,nosuid,nodev,discard,usrquota,grpquota,fsync_mode=nobarrier,reserve_root=32768,resgid=5678,whint_mode=fs-based,inlinecrypt		wait,check,,quota,reservedsize=128M,latemount,,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,fsverity,fscompress
+/dev/block/by-name/misc			/misc		emmc		defaults																	defaults,first_stage_mount

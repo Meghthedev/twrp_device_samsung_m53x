@@ -1,24 +1,30 @@
 #
-# Copyright (C) 2023 The Android Open Source Project
-# Copyright (C) 2023 SebaUbuntu's TWRP device tree generator
+# Copyright (C) 2023 The OrangeFox Recovery Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
-LOCAL_PATH := device/samsung/m53x
+# Enable updating of APEXes
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
+# Installs developer gsi keys into ramdisk, to boot a developer GSI with verified boot.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
+
+# API
+PRODUCT_SHIPPING_API_LEVEL := 31
+
+# Dynamic Partitions
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Fastbootd
 PRODUCT_PACKAGES += \
-	android.hardware.fastboot@1.1-impl-mock \
-	fastbootd
+    android.hardware.fastboot@1.1-impl-mock \
+    fastbootd
 
-PRODUCT_PRODUCT_PROPERTIES += \
-	ro.fastbootd.available=true
+# Kernel
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/Image.gz:kernel
 
 # USB
 PRODUCT_SYSTEM_PROPERTIES += \
     ro.sys.usb.storage.type=mtp
-
-# Kernel
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/Image:kernel
